@@ -7,7 +7,7 @@ export default function ProjectsSection() {
       title: "Portfolio Website",
       description: "My personal portfolio built with Next.js and Tailwind CSS.",
       link: "#",
-      image: "/img/portfolio.png", // replace with my img
+      image: "/img/portfolio.png", // replace with your image
     },
     {
       title: "ToDo App",
@@ -25,12 +25,19 @@ export default function ProjectsSection() {
 
   return (
     <section id="projects" className="max-w-6xl mx-auto my-16 px-6">
-      <h2 className="text-4xl font-bold mb-12 text-center">Projects</h2>
+      <h2 className="text-4xl font-bold mb-12 text-center text-white">Projects</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, i) => (
           <Card
             key={i}
-            className="p-4 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 rounded-xl"
+            className="
+              p-6 flex flex-col justify-between
+              bg-white/10 backdrop-blur-lg
+              border border-white/20
+              rounded-2xl shadow-lg
+              transition-all duration-300
+              hover:shadow-2xl hover:-translate-y-2
+            "
           >
             {/* Project Image */}
             <img
@@ -41,8 +48,8 @@ export default function ProjectsSection() {
 
             {/* Project Info */}
             <div className="flex-1">
-              <h3 className="text-2xl font-semibold mb-2">{project.title}</h3>
-              <p className="text-gray-600 mb-4">{project.description}</p>
+              <h3 className="text-2xl font-semibold mb-2 text-white">{project.title}</h3>
+              <p className="text-gray-200 mb-4">{project.description}</p>
             </div>
 
             {/* View Button */}

@@ -1,42 +1,67 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { FaHome, FaUser, FaLaptopCode, FaProjectDiagram, FaEnvelope } from "react-icons/fa";
+import { useState } from "react";
+import { Navbar, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, NavBody, NavItems, NavbarButton, NavbarLogo } from "@/components/ui/resizable-navbar";
 
-export default function Navbar() {
+export default function NavbarComponent() { // <-- your custom navbar
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { name: "Home", link: "#home" },
+    { name: "About", link: "#about" },
+    { name: "Skills", link: "#skills" },
+    { name: "Projects", link: "#projects" },
+    { name: "Contact", link: "#contact" },
+  ];
+
   return (
-   <nav className="fixed top-0 left-0 right-0 bg-gray-900 text-white shadow-md z-50">
-  <div className="max-w-6xl mx-auto flex justify-between items-center p-6">
-    {/* Logo */}
-    <div className="text-2xl font-bold">Esma Portfolio</div>
+    <div className="relative w-full">
+      <Navbar>
+        <NavBody>
+          <NavbarLogo />
+          <NavItems items={navItems} className="text-white" />
+          <div className="flex items-center gap-4">
+            <NavbarButton variant="primary" href="#contact">
+              Hire Me
+            </NavbarButton>
+          </div>
+        </NavBody>
 
-    {/* Navigation Links */}
-    <div className="flex items-center space-x-4">
-      <a href="#home" className="flex items-center space-x-1 hover:text-blue-400">
-        <FaHome /> <span>Home</span>
-      </a>
-      <a href="#about" className="flex items-center space-x-1 hover:text-blue-400">
-        <FaUser /> <span>About</span>
-      </a>
-      <a href="#skills" className="flex items-center space-x-1 hover:text-blue-400">
-        <FaLaptopCode /> <span>Skills</span>
-      </a>
-      <a href="#projects" className="flex items-center space-x-1 hover:text-blue-400">
-        <FaProjectDiagram /> <span>Projects</span>
-      </a>
-      <a href="#contact" className="flex items-center space-x-1 hover:text-blue-400">
-        <FaEnvelope /> <span>Contact</span>
-      </a>
+        <MobileNav>
+          <MobileNavHeader>
+            <NavbarLogo />
+            <MobileNavToggle
+              isOpen={isMobileMenuOpen}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            />
+          </MobileNavHeader>
+
+          <MobileNavMenu
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
+            className="bg-gray-900 text-white"
+          >
+            {navItems.map((item, idx) => (
+              <a
+                key={idx}
+                href={item.link}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 hover:text-blue-400"
+              >
+                {item.name}
+              </a>
+            ))}
+            <NavbarButton
+              variant="primary"
+              className="mt-4 w-full"
+              onClick={() => setIsMobileMenuOpen(false)}
+              href="#contact"
+            >
+              Hire Me
+            </NavbarButton>
+          </MobileNavMenu>
+        </MobileNav>
+      </Navbar>
     </div>
-
-    {/* CTA Button */}
-    <Button
-      variant="default"
-      className="transition-transform transform hover:scale-105 hover:bg-blue-600 text-white"
-    >
-      Hire Me
-    </Button>
-  </div>
-</nav>
   );
 }

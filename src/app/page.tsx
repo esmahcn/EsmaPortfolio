@@ -1,12 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import Navbar from "./components/navbar";
+
 import AboutSection from "./components/AboutSection";
 import SkillsSection from "./components/SkillsSection";
 import ProjectsSection from "./components/ProjectsSection";
 import ContactSection from "./components/ContactSection";
 import Hyperspeed from "@/blocks/Backgrounds/Hyperspeed/Hyperspeed";
+
 
 export default function Home() {
   return (
@@ -33,9 +34,6 @@ export default function Home() {
           }}
         />
       </div>
-
-      {/* Navbar */}
-      <Navbar />
 
       {/* Hero Section */}
       <section
