@@ -4,7 +4,7 @@ import React from "react";
 import { Hyperspeed as HyperspeedEffect } from "@appletosolutions/reactbits";
 
 interface HyperspeedProps {
-  effectOptions?: any; // You can type this more strictly if you want later
+  effectOptions?: any;
 }
 
 export default function Hyperspeed({ effectOptions }: HyperspeedProps) {
