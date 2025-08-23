@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"  # or "pnpm build" if using pnpm
+  publish = ".next"          # for Next.js projects
+  environment = { 
+    NODE_VERSION = "20"      # optional, specify Node version
+  }
+
+[context.production.environment]
+  NEXT_PUBLIC_BASE_URL = "/"  # optional, if you use env variables

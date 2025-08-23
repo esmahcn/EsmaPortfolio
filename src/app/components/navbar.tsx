@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useTheme } from "next-themes";
+import { Sun, Moon } from "lucide-react";
 import {
   Navbar,
   MobileNav,
@@ -9,7 +11,6 @@ import {
   MobileNavToggle,
   NavBody,
   NavItems,
-  NavbarButton,
   NavbarLogo,
 } from "@/components/ui/resizable-navbar";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
@@ -18,6 +19,7 @@ export default function NavbarComponent() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const { theme, setTheme } = useTheme(); // ✅ Initialize theme
 
   // Track scroll
   const { scrollY } = useScroll({ target: ref });
@@ -56,22 +58,24 @@ export default function NavbarComponent() {
           <NavbarLogo />
           <NavItems
             items={navItems}
-            className={`gap-6 transition-colors duration-300 ${
-              scrolled ? "text-gray-600" : "text-white"
+            className={`gap-6 transition-colors duration-500 ${
+              scrolled ? "text-gray-300" : "text-white"
             }`}
           />
           <div className="flex items-center gap-4">
-            <NavbarButton
-              variant="primary"
-              href="#contact"
-              className={`transition transform hover:scale-105 ${
-                scrolled
-                  ? "bg-blue-500 hover:bg-blue-600 text-white"
-                  : "bg-blue-600 hover:bg-blue-700 text-white"
-              }`}
+            {/* Dark Mode Toggle */}
+            <button
+              className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition"
+              onClick={() =>
+                setTheme(theme === "dark" ? "light" : "dark")
+              }
             >
-              Hire Me
-            </NavbarButton>
+              {theme === "dark" ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </button>
           </div>
         </NavBody>
 
@@ -95,23 +99,26 @@ export default function NavbarComponent() {
                 key={idx}
                 href={item.link}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`block py-2 px-4 rounded transition-colors duration-300 ${
-                  scrolled
-                    ? "text-gray-200 hover:text-blue-400"
-                    : "text-white hover:text-blue-400"
-                }`}
+                className="block py-2 px-4 rounded text-white hover:text-blue-400 transition-colors duration-300"
               >
                 {item.name}
               </a>
             ))}
-            <NavbarButton
-              variant="primary"
-              className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white transition"
-              onClick={() => setIsMobileMenuOpen(false)}
-              href="#contact"
-            >
-              Hire Me
-            </NavbarButton>
+            {/* Mobile Dark Mode Toggle */}
+            <div className="mt-4 flex justify-center">
+              <button
+                className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition"
+                onClick={() =>
+                  setTheme(theme === "dark" ? "light" : "dark")
+                }
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+            </div>
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
