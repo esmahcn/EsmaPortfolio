@@ -20,7 +20,7 @@ export default function Home() {
         className="flex flex-col items-center justify-center h-screen text-center px-6 md:px-12 relative z-10"
       >
          <div className="absolute inset-0 z-0">
-                {/* <Hyperspeed
+                <Hyperspeed
                   effectOptions={{
                     distortion: "turbulentDistortion",
                     length: 400,
@@ -38,7 +38,7 @@ export default function Home() {
                       brokenLines: 0xffff00,
                     },
                   }}
-                /> */}
+                />
               </div>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 z-10">
           Hi, I'm Esma

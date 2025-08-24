@@ -9,26 +9,26 @@ const PROJECTS = [
   {
     title: "Portfolio Website",
     description: "My personal portfolio built with Next.js and Tailwind CSS.",
-    image: "/img/portfolio.png",
-    link: "#",
+    image: "/img/portfolioo.png",
+    link: "https://github.com/esmahcn/EsmaPortfolio",
   },
   {
     title: "ToDo App",
     description: "A React + Redux ToDo application with local storage support.",
     image: "/img/todoapp.png",
-    link: "#",
+    link: "#https://github.com/esmahcn/redux-todo-app",
   },
   {
     title: "E-commerce Store",
     description: "Sneaker store frontend built with React and ShadCN UI.",
     image: "/img/sneakers.png",
-    link: "#",
+    link: "https://github.com/esmahcn/E-commerce-product-page",
   },
   {
     title: "AI Chatbot",
     description: "A modern blog built with Next.js and Markdown.",
     image: "/img/ai chatbot.png",
-    link: "#",
+    link: "https://github.com/esmahcn/AI-chatbot",
   },
 ];
 
