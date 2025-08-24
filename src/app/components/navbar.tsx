@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
 import {
@@ -19,9 +19,15 @@ export default function NavbarComponent() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const { theme, setTheme } = useTheme(); // ✅ Initialize theme
 
-  // Track scroll
+  // Theme
+  const { theme, resolvedTheme, setTheme } = useTheme();
+
+  // Mounted check to prevent hydration mismatch
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // Scroll tracking
   const { scrollY } = useScroll({ target: ref });
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 50);
@@ -64,18 +70,20 @@ export default function NavbarComponent() {
           />
           <div className="flex items-center gap-4">
             {/* Dark Mode Toggle */}
-            <button
-              className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition"
-              onClick={() =>
-                setTheme(theme === "dark" ? "light" : "dark")
-              }
-            >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
+            {mounted && (
+              <button
+                className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition"
+                onClick={() =>
+                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                }
+              >
+                {resolvedTheme === "dark" ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+            )}
           </div>
         </NavBody>
 
@@ -104,21 +112,24 @@ export default function NavbarComponent() {
                 {item.name}
               </a>
             ))}
+
             {/* Mobile Dark Mode Toggle */}
-            <div className="mt-4 flex justify-center">
-              <button
-                className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition"
-                onClick={() =>
-                  setTheme(theme === "dark" ? "light" : "dark")
-                }
-              >
-                {theme === "dark" ? (
-                  <Sun className="w-5 h-5" />
-                ) : (
-                  <Moon className="w-5 h-5" />
-                )}
-              </button>
-            </div>
+            {mounted && (
+              <div className="mt-4 flex justify-center">
+                <button
+                  className="p-2 rounded-full bg-gray-700 hover:bg-gray-600 text-white transition"
+                  onClick={() =>
+                    setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                  }
+                >
+                  {resolvedTheme === "dark" ? (
+                    <Sun className="w-5 h-5" />
+                  ) : (
+                    <Moon className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
+            )}
           </MobileNavMenu>
         </MobileNav>
       </Navbar>
